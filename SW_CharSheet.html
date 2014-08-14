@@ -288,7 +288,6 @@
 						<input type="text" name="attr_hindrance" style='width:152px;'/>
 					</div>
 					<div class='sheet-col' style='width:480;'>
-						<!-- <input type="text" name='attr_hindrancedescription' style='width:480px;' /> -->
 						<textarea class="largetextarea" name='attr_hindrancedescription'></textarea>
 					</div>
 				</fieldset>
@@ -314,7 +313,6 @@
 						<input type="text" name="attr_tookat" style='width:75px;'/>
 					</div>
 					<div class='sheet-col'>
-						<!-- <input type="text" name='attr_edgedescription' style='width:400px;' /> -->
 						<textarea name='attr_edgedescription' style='width:585px; height:50px;'></textarea>
 					</div>
 				</fieldset>
@@ -329,9 +327,7 @@
 				<div class='sheet-col' style='width:250px; border-bottom-style:dashed; border-width:1px;'>
 					<h3>Linked Attribute</h3>
 				</div>
-				<!--<div class='sheet-col style='width:100px; border-bottom-style:dashed; border-width:1px;'>
-					&nbsp;
-				</div>-->
+				
 				<div class='sheet-col' style='width:100px; border-bottom-style:dashed; border-width:1px;'>
 					<h3>Modifiers</h3>
 				</div>
@@ -342,7 +338,6 @@
 					<div class='sheet-col' style='width:300px;'>
 						<input type="hidden" name="attr_Unskilled" value="4" />
 						<label>Unskilled</label>
-						<!--<input type="number" name="attr_Fighting" value="4"/>-->
 					</div>
 					<div class='sheet-col' style='width:250px; text-align:left;'>
 						&nbsp;
@@ -355,7 +350,6 @@
 				</div>
 				<!-- Break -->
 				<div class='sheet-col' style='width:300px;'>
-					<!-- <span style='text-align:bottom; font-weight:bold;'>d</span><input type="number" name="attr_Fighting" value="0"/> -->
 					<select name="attr_fighting" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
 							<option value="6!">d6</option>
@@ -372,17 +366,6 @@
 				<div class='sheet-col' style='width:250px; text-align:left;'>
 					<span style='text-align:bottom; font-weight:bold;'>d</span><input type="number" name="attr_LinkedFightingAtt" class="sheet-short" value="@{LinkedFighting}" disabled="true" />
 					<input type="hidden" name="attr_LinkedFighting" value="@{agility}" />
-					<!-- <select name="attr_LinkedFightingAtt" class="dtype" value="@{attr_LinkedFighting}" style='width:70px;' disabled="true">
-						<option value="4!">d4</option>
-						<option value="6!">d6</option>
-						<option value="8!">d8</option>
-						<option value="10!">d10</option>
-						<option value="12!">d12</option>
-						<option value="12!+1">d12+1</option>
-						<option value="12!+2">d12+2</option>
-						<option value="12!+3">d12+3</option>
-						<option value="12!+4">d12+4</option>
-					</select> -->
 					<label style='width:90px;'>&nbsp;Agility</label>
 				</div>
 		
@@ -394,7 +377,6 @@
 				<fieldset class="repeating_skills">
 					<div class='sheet-row'>
 						<div class='sheet-col' style='width:300px;'>
-							<!-- <span style='text-align:right; font-weight:bold;'>d</span><input type="number" name="attr_SkillNameRank" value="4"/> -->
 							<select name="attr_SkillNameRank" class="dtype" value="4!" style='width:70px;'>
 								<option value="4!">d4</option>
 								<option value="6!">d6</option>
@@ -411,17 +393,6 @@
 						<div class='sheet-col' style='width:250px;'>
 							<span style='text-align:bottom; font-weight:bold;'>d</span>
 							<input type="number" name="attr_LinkedSkillNameAttScore" class="sheet-short" value="@{LinkedSkillNameAtt}" disabled="true" />
-							<!-- <select name="attr_LinkedSkillNameAttScore" class="dtype" value="@{LinkedSkillNameAtt}" style='width:70px;'>
-								<option value="4">d4</option>
-								<option value="6">d6</option>
-								<option value="8">d8</option>
-								<option value="10">d10</option>
-								<option value="12">d12</option>
-								<option value="13">d12+1</option>
-								<option value="14">d12+2</option>
-								<option value="15">d12+3</option>
-								<option value="16">d12+4</option>
-							</select> -->
 							<label style='width:150px;'><select name="attr_LinkedSkillNameAtt" class="atype">
 								<option value="@{agility}">Agility</option>
 								<option value="@{smarts}">Smarts</option>

@@ -1,8 +1,8 @@
 {
 	"html": "SW_CharSheet.html",
 	"css": "SW_CharSheet.css",
-	"authors": "Josiah Bradbury","Richard Finder"
-	"roll20userid": "27026","173448"
+	"authors": "Richard Finder",
+	"roll20userid": "173448",
 	"preview": "SW_CharSheet.PNG",
 	"instructions": "Use the Macro Formula field to help create Token Action Macros."
 }

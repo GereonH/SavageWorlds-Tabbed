@@ -1,4 +1,116 @@
 <div class='sheet-maindiv'>
+    <!-- attr_ names used in this character sheet
+     | attr_is_npc								used to switch between PC and NPC view of the Character Sheet
+	 | attr_core-tab							used for the different PC Sheet View tabs
+	 | attr_character_name						used to match the character name from the Info&Notes tab of the Roll20 Character Sheet
+	 | attr_race								used for the Character race
+	 | attr_xp									used for the character experience poince
+	 | attr_rank								used for the character's rank
+	 | attr_pace								used for the character's Pace
+	 | attr_paceMod								used for the character's Pace Modifier (e.g. Fleet Footed Edge, etc)
+	 | attr_paceCur								the sum of the attr_pace and attr_paceMod
+	 | attr_parry								(attr_Fighting/2)+2
+	 | attr_parryMod							used for the any modifiers to a character's Parry (e.g. Block Edge, etc)
+	 | attr_parryCur							the sum of the attr_parry and attr_parryCur
+	 | attr_toughnessbase						(attr_vigor/2)+2
+	 | attr_toughnessMod						used for any modifiers to a characer's Toughness (e.g. Brawny Edge, etc)
+	 | attr_toughnessbasePMod					the sum of attr_toughnessbase and attr_toughnessbasePMod
+	 | attr_touhgnessArmor						used for any armor modifiers to toughness
+	 | attr_toughnesscur						the sum of the attr_toughnessbase, attr_toughnessMod, and attr_toughnessArmor
+	 | attr_wilddie								the die type used for the Wild Card
+	 | attr_age									the character's age
+	 | attr_gender								the character's gender
+	 | attr_charisma							the character's Charisma score
+	 | attr_money								the character's money
+	 | attr_agility								the character's Agility score
+	 | attr_agMod								used for any modifiers to a character's agility
+	 | attr_rollAgility							can be used to create a macro that mimics the Agility button on the character sheet
+	 | attr_smarts								the character's Smarts score
+	 | attr_smMod								used for any modifiers to a character's Smarts
+	 | attr_rollSmarts							can be used to create a macro to that mimics the Smarts button on the character sheet
+	 | attr_spirit								the character's Spirit score
+	 | attr_spMod								used for any modifiers to a character's Spirit
+	 | attr_rollSpirit							can be used to create a macro to that mimics the Spirit button on the character sheet
+	 | attr_strength							the character's Strength score
+	 | attr_stMod								used for any modifiers to a character's Strength
+	 | attr_rollStrength						can be used to create a macro to that mimics the Strength button on the character sheet
+	 | attr_vigor								the character's Vigor score
+	 | attr_viMod								used for any modifiers to a character's Vigor
+	 | attr_rollVigor							can be used to create a macro to that mimics the Vigor button on the character sheet
+	 | attr_wounds								the number of wounds the character has
+	 | attr_wounds_max							The max number of wounds one can receive before going incapacitated
+	 | attr_fatigue								the number fo fatigue points the character has
+	 | attr_fatigue_max							the max number of fatigue points a character receive going incapacitated
+	 | attr_ttmod								Trait Test Mod - Situational Modifiers
+	 | attr_dmgmod								Damage modifier (can be used for things like additional damage due to a Joker, or going Berserk, etc)
+	 | attr_BenniesUsed							The number of Bennies used during the game
+	 | attr_physdescription						Physicial description of the character
+	 | attr_hindrance (repeating)				The name of a hindrance, would be used like repeating_hindrances_0_hindrance
+	 | attr_hindrancedescription (repeating)	the description of a hindrance, would be used like repeating_hindrances_0_hindrancedescription
+	 | attr_edge								The name of an edge, would be used like: repeating_edges_0_edge
+	 | attr_tookat								At what XP was the edge taken (i.e. 5, 10, 0, GM, etc), would be used like: repeating_edges_0_tookat
+	 | attr_edgedescription						Description of the Edge, would be used like: repeating_edges_0_edgedescription
+	 | attr_Unskilled							The Unskilled "skill"
+	 | attr_Fighting							The Fighting skill
+	 | attr_UnskilledMod						Any modifiers that may impact the Unskilled roll (besides situational modifiers)
+	 | attr_rollUnskilled						The Unskilled Roll formula. can be used as a macro
+	 | attr_fighting							The fighting skill die type
+	 | attr_LinkedFightingAtt					The Linked attribute for Fighting
+	 | attr_FightingMod							Any modifiers that may impact the Fighting Skill roll (besides situational modifiers)
+	 | attr_rollFighting						The Fighting Roll formula. Can be used as a macro
+	 | attr_SkillNameRank (repeating)			Die Type of a new skill. would be used like: repeating_skills_0_SkillNameRank
+	 | attr_SkillName							The name of a new skill. would be used like: repeating_skills_0_SkillNameRank
+	 | attr_LinkedSkillNameAttScore				The die type of the Linked Attribute for the new skill. would be used like: repeating_skills_0_LinkedSkillNameAttScore
+	 | attr_LinkedSkillNameAtt					The Name of the linked attribute. would be used like: repeating_skills_0_LinkedSkillNameAtt
+	 | attr_SkillNameMod						Any modifiers that may impact the skill roll. would be used like: repeating_skills_0_SkillNameMod
+	 | attr_SkillFormula						The formula of the roll button for each of the repeating skills.  This can cut and pasted into a macro and modified as needed.
+	 | attr_ArmorType							The type of armor. would be used: repeating_armor_0_ArmorType
+	 | attr_AreaProtected						The area protected by the armor. would be used: repeating_armor_0_AreaProtected
+	 | attr_ArmorTypeProtection					The protection allotted by the armor. would be used: repeating_armor_0_ArmorTypeProtection
+	 | attr_ArmorTypeWeight						The weight of the armor. would be used: repeating_armor_0_ArmorTypeWeight
+	 | attr_ArmorNotes							Any special notes for the piece of armor. would be used: repeating_armor_0_ArmorNotes
+	 | attr_WeaponType							The type of Melee Weapon. would be used: repeating_meleeweapons_0_WeaponType
+	 | attr_StrengthDmg							the Strength Die Type for damage purposes. would be used: repeating_meleeweapons_0_StrengthDmg
+	 | attr_DmgType								The damage die type. would be used: repeating_meleeweapons_0_DmgType
+	 | attr_MDmgMod								Any modifiers for Melee Damage, aside from situational modifiers. would be used: repeating_meleeweapons_0_MDmgMod
+	 | attr_DmgRaise							The die type to use if a Raise was scored on the attack. would be used: repeating_meleeweapons_0_DmgRaise
+	 | attr_WeaponWeight						The weight of the weapons. would be used: repeating_meleeweapons_0_WeaponWeight
+	 | attr_meleeWNotes							Any notes pertaining to the weapons. would be used: repeating_meleeweapons_0_meleeNotes
+	 | attr_MeleeFormula						The formula used for melee weapon damage on the roll button. this can be cut/pasted into a macro
+	 | attr_RangeFormula						The formula used for Ranged weapon damage on the roll button. this can be cut/pasted into a macro
+	 | attr_SpellFormula						The formula used for Spell damage on the roll button. this can be cut/pasted into a macro
+	 | attr_RWeaponType							The type of Ranged Weapon. would be used: repeating_rangeweapons_0_RWeaponType
+	 | attr_WeaponRange							The range values of the Ranged Weapon. would be used: repeating_rangeweapons_0_WeaponRange
+	 | attr_WeaponRoF							The rate of fire of the Ranged Weapon. would be used: repeating_rangeweapons_0_WeaponRoF
+	 | attr_NoDmgDice							The Number of Dice to use when rolling damage. would be used: repeating_rangeweapons_0_NoDmgDice
+	 | attr_RDmgType							The die type to roll when doing damage. would be used: repeating_rangeweapons_0_RDmgType
+	 | attr_RDmgMod								Any modifiers that would apply to the Range Weapon damage, aside from situational modifiers. would be used: repeating_rangeweapons_0_RDmgMod
+	 | attr_RDmgRaise							The die type to use if a raise was scored on teh attack. would be used: repeating_rangeweapons_0_RDmgRaise
+	 | attr_RWeaponWeight						The weight of the ranged weapon. would be used: repeating_rangeweapons_0_RWeaponWeight
+	 | attr_rangeWNotes							Any notes pertaining to the Ranged Weapon. would be used: repeating_rangeweapons_0_rangeWNotes
+	 | attr_gear								Any additional gear that character may have. would be used: repeating_rangeweapons_0_gear
+	 | attr_PowerPoints							The number of power points the character may have
+	 | attr_PowerPoints_max						The maximum number of power points the character may have
+	 | attr_Spell								The name of a damage-causing spell. would be used: repeating_dmgspells_0_Spell
+	 | attr_SpellDuration						The duration of the spell. would be used: repeating_dmgspells_0_SpellDuration
+	 | attr_SpellCost							The cost of the spell. would be used: repeating_dmgspells_0_SpellCost
+	 | attr_NoSpllDmgDice						The number of dice used when rolling damage. would be used: repeating_dmgspells_0_NoSpllDmgDice
+	 | attr_SDmgType							The die type to use when rolling damage. would be used: repeating_dmgspells_0_SDmgType
+	 | attr_SDmgMod								Any modifiers to apply to the damage roll for the spell, aside from situational modifiers. would be used: repeating_dmgspells_0_SDmgMod
+	 | attr_SDmgRaise							The die type to use for bonus damage if a raise was scored. would be used: repeating_dmgspells_0_SDmgRaise
+	 | attr_DmgSpellNotes						Any notes pertaining to the spell. would be used: repeating_dmgspells_0_DmgSpellNotes
+	 | attr_NDSpell								The name of a non-damage causing spell. would be used: repeating_ndspells_0_NDSpell
+	 | attr_NDSpellDuration						The spell duration for non-damage causing spell. would be used: repeating_ndspells_0_NDSpellDuration
+	 | attr_NDSpellCost							The cost of the spell. would be used: repeating_ndspells_0_NDSpellCost
+	 | attr_ndSpellNotes						Any notes pertaining to the spell. would be used: repeating_ndspells_0_ndSpellNotes
+	 | attr_Quest								The name of a quest. would be used: repeating_quests_0_Quest
+	 | attr_QuestBoss							Who sent the character on that particular quest. repeating_quests_0_QuestBoss
+	 | attr_QuestGoal							The goal of the particular quest. repeating_quests_0_QuestGoal
+	 | attr_questLog							Any notes (milestones achieved, progress made, etc) pertaining to the quest. repeating_quests_0_questlog
+	 | attr_QuestComplete						A checkbox to indicate whether the quest was completed or is still ongoing. repeating_quests_0_QuestComplete
+	 | attr_partybag							Anything pertaining to the party. such as community gear, money, food, etc.
+	 | attr_CharNotes							Any character notes one may feel like entering.
+	 -->
     <input class="sheet-is-npc" type="checkbox" name="attr_is_npc" value="1"><span class="sheet-is-npc-tab"></span>
     <p style='text-align: center;'>
         <img src="http://i.imgur.com/iwIoTlT.png" style="max-height: 100px;" /><br/>
@@ -169,8 +281,8 @@
 							<option value="12!+3">d12+3</option>
 							<option value="12!+4">d12+4</option>
 						 </select>+<input type="number" name="attr_agMod" value="0" />
-						<button type='roll' name='roll_Agility' value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility]+@{agMod}[Agility Modifier],1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-						<input type='hidden' name=attr_rollAgility value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+						<button type='roll' name='roll_Agility' value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 + @{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+						<input type='hidden' name=attr_rollAgility value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 + @{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
 					<label style='width:60px;'>Smarts:</label>
 						<select name="attr_smarts" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
@@ -184,8 +296,8 @@
 							<option value="12!+4">d12+4</option>
 						 </select>+<input type="number" name="attr_smMod" value="0" />
 						 <input type="hidden" name="attr_fullsmarts" value="d@{smarts}" />
-						<button type='roll' name='roll_Smarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts]+@{smMod}[Smarts Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-						<input type='hidden' name='attr_rollSmarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts]+@{smMod}[Smarts Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+						<button type='roll' name='roll_Smarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 +@{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+						<input type='hidden' name='attr_rollSmarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 +@{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
 					<label style='width:60px;'>Spirit:</label>
 						<select name="attr_spirit" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
@@ -198,8 +310,8 @@
 							<option value="12!+3">d12+3</option>
 							<option value="12!+4">d12+4</option>
 						 </select>+<input type="number" name="attr_spMod" value="0" />
-						<button type='roll' name='roll_Spirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit]+@{spMod}[Spirit Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-						<input type='hidden' name='attr_rollSpirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit]+@{spMod}[Spirit Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+						<button type='roll' name='roll_Spirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+						<input type='hidden' name='attr_rollSpirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
 					<label style='width:60px;'>Strength:</label>
 						<select name="attr_strength" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
@@ -212,8 +324,8 @@
 							<option value="12!+3">d12+3</option>
 							<option value="12!+4">d12+4</option>
 						 </select>+<input type="number" name="attr_stMod" value="0" />
-						<button type='roll' name='roll_Strength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength]+@{stMod}[Strength Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-						<input type='hidden' name='attr_rollStrength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength]+@{stMod}[Strength Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+						<button type='roll' name='roll_Strength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 +@{stMod}[Strength Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+						<input type='hidden' name='attr_rollStrength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 +@{stMod}[Strength Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
 					<label style='width:60px;'>Vigor:</label>
 						<select name="attr_vigor" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
@@ -227,7 +339,7 @@
 							<option value="12!+4">d12+4</option>
 						 </select>+<input type="number" name="attr_viMod" value="0" />
 						<button type='roll' name='roll_Vigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor]+@{viMod}[Vigor Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-						<input type='hidden' name='attr_rollVigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor]+@{viMod}[Vigor Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+						<input type='hidden' name='attr_rollVigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor], 1d@{wilddie}![Wild Die]}kh1 +@{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
 				</div><!-- End Attribute Column -->
 				<div class='sheet-col' style='width:320px;'>
 					<h2 style='text-align:center;'>Health</h2<br />
@@ -288,6 +400,7 @@
 						<input type="text" name="attr_hindrance" style='width:152px;'/>
 					</div>
 					<div class='sheet-col' style='width:480;'>
+						<!-- <input type="text" name='attr_hindrancedescription' style='width:480px;' /> -->
 						<textarea class="largetextarea" name='attr_hindrancedescription'></textarea>
 					</div>
 				</fieldset>
@@ -313,6 +426,7 @@
 						<input type="text" name="attr_tookat" style='width:75px;'/>
 					</div>
 					<div class='sheet-col'>
+						<!-- <input type="text" name='attr_edgedescription' style='width:400px;' /> -->
 						<textarea name='attr_edgedescription' style='width:585px; height:50px;'></textarea>
 					</div>
 				</fieldset>
@@ -327,7 +441,9 @@
 				<div class='sheet-col' style='width:250px; border-bottom-style:dashed; border-width:1px;'>
 					<h3>Linked Attribute</h3>
 				</div>
-				
+				<!--<div class='sheet-col style='width:100px; border-bottom-style:dashed; border-width:1px;'>
+					&nbsp;
+				</div>-->
 				<div class='sheet-col' style='width:100px; border-bottom-style:dashed; border-width:1px;'>
 					<h3>Modifiers</h3>
 				</div>
@@ -338,6 +454,7 @@
 					<div class='sheet-col' style='width:300px;'>
 						<input type="hidden" name="attr_Unskilled" value="4" />
 						<label>Unskilled</label>
+						<!--<input type="number" name="attr_Fighting" value="4"/>-->
 					</div>
 					<div class='sheet-col' style='width:250px; text-align:left;'>
 						&nbsp;
@@ -350,6 +467,7 @@
 				</div>
 				<!-- Break -->
 				<div class='sheet-col' style='width:300px;'>
+					<!-- <span style='text-align:bottom; font-weight:bold;'>d</span><input type="number" name="attr_Fighting" value="0"/> -->
 					<select name="attr_fighting" class="dtype" value="4!" style='width:70px;'>
 							<option value="4!">d4</option>
 							<option value="6!">d6</option>
@@ -366,6 +484,17 @@
 				<div class='sheet-col' style='width:250px; text-align:left;'>
 					<span style='text-align:bottom; font-weight:bold;'>d</span><input type="number" name="attr_LinkedFightingAtt" class="sheet-short" value="@{LinkedFighting}" disabled="true" />
 					<input type="hidden" name="attr_LinkedFighting" value="@{agility}" />
+					<!-- <select name="attr_LinkedFightingAtt" class="dtype" value="@{attr_LinkedFighting}" style='width:70px;' disabled="true">
+						<option value="4!">d4</option>
+						<option value="6!">d6</option>
+						<option value="8!">d8</option>
+						<option value="10!">d10</option>
+						<option value="12!">d12</option>
+						<option value="12!+1">d12+1</option>
+						<option value="12!+2">d12+2</option>
+						<option value="12!+3">d12+3</option>
+						<option value="12!+4">d12+4</option>
+					</select> -->
 					<label style='width:90px;'>&nbsp;Agility</label>
 				</div>
 		
@@ -377,6 +506,7 @@
 				<fieldset class="repeating_skills">
 					<div class='sheet-row'>
 						<div class='sheet-col' style='width:300px;'>
+							<!-- <span style='text-align:right; font-weight:bold;'>d</span><input type="number" name="attr_SkillNameRank" value="4"/> -->
 							<select name="attr_SkillNameRank" class="dtype" value="4!" style='width:70px;'>
 								<option value="4!">d4</option>
 								<option value="6!">d6</option>
@@ -393,6 +523,17 @@
 						<div class='sheet-col' style='width:250px;'>
 							<span style='text-align:bottom; font-weight:bold;'>d</span>
 							<input type="number" name="attr_LinkedSkillNameAttScore" class="sheet-short" value="@{LinkedSkillNameAtt}" disabled="true" />
+							<!-- <select name="attr_LinkedSkillNameAttScore" class="dtype" value="@{LinkedSkillNameAtt}" style='width:70px;'>
+								<option value="4">d4</option>
+								<option value="6">d6</option>
+								<option value="8">d8</option>
+								<option value="10">d10</option>
+								<option value="12">d12</option>
+								<option value="13">d12+1</option>
+								<option value="14">d12+2</option>
+								<option value="15">d12+3</option>
+								<option value="16">d12+4</option>
+							</select> -->
 							<label style='width:150px;'><select name="attr_LinkedSkillNameAtt" class="atype">
 								<option value="@{agility}">Agility</option>
 								<option value="@{smarts}">Smarts</option>
@@ -744,7 +885,7 @@
 						<input type="text" name="attr_QuestBoss" style='width:90px;' /> 
 					</div>
 					<div class='sheet-col' style='width:100px;'> <!-- Goal (100px) -->
-						<input type="text" name="attr_SpellCost" style='width:90px;' /> 
+						<input type="text" name="attr_QuestGoal" style='width:90px;' /> 
 					</div>
 					<div class='sheet-col' style='width:400px;'> <!-- Notes (450px) -->
 						<textarea name="attr_questLog" class="sheet-smalltextarea" style="height:50px; width:390px;"></textarea>
@@ -765,7 +906,7 @@
     <!--           -->
     <!-- NPC Sheet -->
     <!--           -->
-    <div class="sheet-npc" style='width:830px;'>
+    <div class="sheet-npc" style='width:830px; background-color:#e0e0e0;'>
     	<div class='sheet-row'>
     		<div class='sheet-col' style='width:270px;'>
 				<table>
@@ -907,8 +1048,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_agMod' value='0' />
-    					<button type='roll' name='roll_Agility' sytle='margin:0px;' value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility]+ @{agMod}[Agility Modifier],1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name=attr_rollAgility value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility]+@{agMod}[Agility Modifier],1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_Agility' sytle='margin:0px;' value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 + @{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name=attr_rollAgility value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 +@{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Smarts:</label>
     					<select name="attr_smarts" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -921,8 +1062,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_smMod' value='0' />
-    					<button type='roll' name='roll_Smarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts]+ @{smMod}[Smarts Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollSmarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts]+ @{smMod}[Smarts Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_Smarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollSmarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Spirit:</label>
     					<select name="attr_spirit" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -935,8 +1076,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_spMod' value='0' />
-    					<button type='roll' name='roll_Spirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit]+@{spMod}[Spirit Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollSpirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit]+@{spMod}[Spirit Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_Spirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollSpirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Strength:</label>
     					<select name="attr_strength" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -949,8 +1090,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_stMod' value='0' />
-    					<button type='roll' name='roll_Strength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength]+ @{stMod}[Strenght Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollStrength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength]+ @{stMod}[Strenght Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_Strength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollStrength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Vigor:</label>
     					<select name="attr_vigor" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -963,8 +1104,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_viMod' value='0' />
-    					<button type='roll' name='roll_Vigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor]+ @{viMod}[Vigor Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollVigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor]+ @{viMod}[Vigor Modifier], 1d@{wilddie}![Wild Die]}kh1 + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_Vigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor], 1d@{wilddie}![Wild Die]}kh1 + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollVigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor], 1d@{wilddie}![Wild Die]}kh1 + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     			</div> <!-- End Attributes Column -->
     			<div class='sheet-col' style='width:560px;'>
     				<h2 style='text-align:center;'>Edges & Hindrances</h2><br />
@@ -1234,7 +1375,7 @@
     					</div>
     				</div>
     			</fieldset>
-    			<input type='checkbox' name='attr_MeleeFormula'class='arrow' style='width:15px;' checked='checked'/> Hide Macro Formula
+    			<input type='checkbox' name='attr_RangeFormula'class='arrow' style='width:15px;' checked='checked'/> Hide Macro Formula
     			<div class='sheet-formula' style='width:830px; height:60px; border:solid; border-width:1px;'>
         			<textarea style='width:820px; height:50px;'>/em @{character_name} attempts to do damage with a @{repeating_rangeweapons_0_RWeaponType} and rolls: [[@{repeating_rangeweapons_0_NoDmgDice}@{repeating_rangeweapons_0_RDmgType}+@{dmgmod}[Damage Modifier]+@{repeating_rangeweapons_0_RDmgMod}[Weapon Damage]+@{repeating_rangeweapons_0_RDmgRaise}[Bonus Damage]]]!</textarea><br />
         			<span style='color:red;'><strong>NOTE:</strong> the <span style='border:solid, border-width:1px;'> _0_ </span> represents the first added skill. For each subsequent skill added, increment the number.</span>
@@ -1306,7 +1447,7 @@
     				</div>
     			</div>
     		</fieldset>
-    		<input type='checkbox' name='attr_MeleeFormula'class='arrow' style='width:15px;' checked='checked'/> Hide Macro Formula
+    		<input type='checkbox' name='attr_SpellFormula'class='arrow' style='width:15px;' checked='checked'/> Hide Macro Formula
     		<div class='sheet-formula' style='width:830px; height:60px; border:solid; border-width:1px;'>
         		<textarea style='width:820px; height:50px;'>/em @{character_name} attempts to do damage with a @{repeating_dmgspells_0_Spell} and rolls: [[@{repeating_dmgspells_0_NoSpllDice}@{repeating_dmgspells_0_SDmgType}+@{repeating_dmgspells_0_SDmgMod}[Spell Damage]+@{dmgmod}[Damage Modifier]+@{repeating_dmgspells_0_SDmgRaise}[Bonus Damage]]]!</textarea><br />
         		<span style='color:red;'><strong>NOTE:</strong> the <span style='border:solid, border-width:1px;'> _0_ </span> represents the first added skill. For each subsequent skill added, increment the number.</span>

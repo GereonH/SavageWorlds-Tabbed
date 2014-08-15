@@ -25,18 +25,23 @@
 	 | attr_agility								the character's Agility score
 	 | attr_agMod								used for any modifiers to a character's agility
 	 | attr_rollAgility							can be used to create a macro that mimics the Agility button on the character sheet
+	 | attr_rollmAgility						can be used to create a macro that mimics the Agility button on the Mook/Ally character sheet
 	 | attr_smarts								the character's Smarts score
 	 | attr_smMod								used for any modifiers to a character's Smarts
 	 | attr_rollSmarts							can be used to create a macro to that mimics the Smarts button on the character sheet
+	 | attr_rollmSmarts							can be used to create a macro to that mimics the Smarts button on the Mook/Ally character sheet
 	 | attr_spirit								the character's Spirit score
 	 | attr_spMod								used for any modifiers to a character's Spirit
 	 | attr_rollSpirit							can be used to create a macro to that mimics the Spirit button on the character sheet
+	 | attr_rollmSpirity						can be used to create a macro to that mimics the Spirit button on the Mook/Ally character sheet
 	 | attr_strength							the character's Strength score
 	 | attr_stMod								used for any modifiers to a character's Strength
 	 | attr_rollStrength						can be used to create a macro to that mimics the Strength button on the character sheet
+	 | attr_rollmStrength						can be used to create a macro to that mimics the Strength button on the Mook/Ally character sheet
 	 | attr_vigor								the character's Vigor score
 	 | attr_viMod								used for any modifiers to a character's Vigor
 	 | attr_rollVigor							can be used to create a macro to that mimics the Vigor button on the character sheet
+	 | attr_rollmVigor							can be used to create a macro to that mimics the Vigor button on the Mook/Ally character sheet
 	 | attr_wounds								the number of wounds the character has
 	 | attr_wounds_max							The max number of wounds one can receive before going incapacitated
 	 | attr_fatigue								the number fo fatigue points the character has
@@ -962,6 +967,8 @@
                         	<td><label class='sheet-nameRankXp'>Pace:</label></td><td>&nbsp;</td>
                         	<td><input type="number" name="attr_pace" class="sheet-short" value="6" /></td>
                         	<td><input type="number" name="attr_paceMod" class="sheet-short" value="0" /></td>
+							<td>&npsp;</td>
+							<td><input type="number" name="attr_paceCur" class="sheet-short" value="@{pace}+@{paceMod}" />
                     	</tr>
                     	<tr>
                         	<td><label class='sheet-nameRankXp'>Parry:</label></td><td>&nbsp;</td>
@@ -972,7 +979,10 @@
                     	<tr>
                         	<td><label class='sheet-nameRankXp'>Toughness:</label></td><td>&nbsp;</td>
                         	<td><input type="number" name="attr_toughnessbase" class="sheet-short" value="floor(((@{vigor})/2)+2+@{toughnessmod})" disabled="true" /></td>
-                        	<td><input type="number" name="attr_toughnessMod" class="sheet-short" value="0" /></td>
+                        	<td>
+                        		<input type="number" name="attr_toughnessMod" class="sheet-short" value="0" />
+                        		<input type="hidden" name="attr_toughnessBasePMod"  value="@{toughnessbase}+{@toughnessMod}" />
+                        	</td>
                         	<td><input type="number" name="attr_toughnessArmor" class="sheet-short" value="0" /></td>
                         	<td><input type="number" name="attr_toughnesscur" class="sheet-short" value="floor(((@{vigor})/2)+2+@{toughnessmod}+@{toughnessarmor})" disabled="true" /></td>
                     	</tr>
@@ -1048,8 +1058,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_agMod' value='0' />
-    					<button type='roll' name='roll_Agility' sytle='margin:0px;' value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 + @{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name=attr_rollAgility value='/em @{character_name} attempts to be agile and rolls [[{1d@{agility}[Agility],1d@{wilddie}![Wild Die]}kh1 +@{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_mAgility' sytle='margin:0px;' value='/em @{character_name} attempts to be agile and rolls [[1d@{agility}[Agility] + @{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name=attr_rollmAgility value='/em @{character_name} attempts to be agile and rolls [[1d@{agility}[Agility] +@{agMod}[Agility Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Smarts:</label>
     					<select name="attr_smarts" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -1062,8 +1072,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_smMod' value='0' />
-    					<button type='roll' name='roll_Smarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollSmarts' value='/em @{character_name} attempts to be smart and rolls [[{1d@{smarts}[Smarts], 1d@{wilddie}![Wild Die]}kh1 + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_mSmarts' value='/em @{character_name} attempts to be smart and rolls [[1d@{smarts}[Smarts] + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollmSmarts' value='/em @{character_name} attempts to be smart and rolls [[1d@{smarts}[Smarts] + @{smMod}[Smarts Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Spirit:</label>
     					<select name="attr_spirit" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -1076,8 +1086,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_spMod' value='0' />
-    					<button type='roll' name='roll_Spirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollSpirit' value='/em @{character_name} attempts to be spirited and rolls [[{1d@{spirit}[Spirit], 1d@{wilddie}![Wild Die]}kh1 +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_mSpirit' value='/em @{character_name} attempts to be spirited and rolls [[1d@{spirit}[Spirit] +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollmSpirit' value='/em @{character_name} attempts to be spirited and rolls [[1d@{spirit}[Spirit] +@{spMod}[Spirit Modifier] + @{ttmod}[Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Strength:</label>
     					<select name="attr_strength" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -1090,8 +1100,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_stMod' value='0' />
-    					<button type='roll' name='roll_Strength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollStrength' value='/em @{character_name} attempts to be strong and rolls [[{1d@{strength}[Strength], 1d@{wilddie}![Wild Die]}kh1 + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_mStrength' value='/em @{character_name} attempts to be strong and rolls [[1d@{strength}[Strength] + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollmStrength' value='/em @{character_name} attempts to be strong and rolls [[1d@{strength}[Strength] + @{stMod}[Strenght Modifier] + @{ttmod}[Modifiers] +@{dmgmod}[Damage Modifiers]  - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     				<label style='width:60px;'>Vigor:</label>
     					<select name="attr_vigor" class="dtype" value="4!" style='width:70px;'>
     						<option value="4!">d4</option>
@@ -1104,8 +1114,8 @@
     						<option value="12!+3">d12+3</option>
     						<option value="12!+4">d12+4</option>
            		 		</select>+<input type='number' name='attr_viMod' value='0' />
-    					<button type='roll' name='roll_Vigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor], 1d@{wilddie}![Wild Die]}kh1 + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
-    					<input type='hidden' name='attr_rollVigor' value='/em @{character_name} attempts to be healthy and rolls [[{1d@{vigor}[Vigor], 1d@{wilddie}![Wild Die]}kh1 + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
+    					<button type='roll' name='roll_mVigor' value='/em @{character_name} attempts to be healthy and rolls [[1d@{vigor}[Vigor] + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]'></button><br />
+    					<input type='hidden' name='attr_rollmVigor' value='/em @{character_name} attempts to be healthy and rolls [[1d@{vigor}[Vigor] + @{viMod}[Vigor Modifier] + @{ttmod}[Modifiers] - @{Wounds}[Wounds] - @{fatigue}[Fatigue]]]' />
     			</div> <!-- End Attributes Column -->
     			<div class='sheet-col' style='width:560px;'>
     				<h2 style='text-align:center;'>Edges & Hindrances</h2><br />
@@ -1151,8 +1161,8 @@
 					<div class='sheet-col' style='width:100px;'>
 						<br />
 						<input type="number" name="attr_UnskilledMod" class="sheet-short" value="0" />
-						<button type='roll' name='roll_Unskilled' value='/em @{character_name} attempts to not suck and rolls: [[{1d@{Unskilled}![Unskilled], 1d@{wilddie}![Wild Die]}kh1 -2[Unskilled Penalty] + @{UnskilledMod}[Other Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
-						<input type='hidden' name='attr_rollUnskilled' value='/em @{character_name} attempts to not suck and rolls: [[{1d@{Unskilled}![Unskilled], 1d@{wilddie}![Wild Die]}kh1 -2[Unskilled Penalty] + @{UnskilledMod}[Other Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
+						<button type='roll' name='roll_mUnskilled' value='/em @{character_name} attempts to not suck and rolls: [[1d@{Unskilled}![Unskilled] -2[Unskilled Penalty] + @{UnskilledMod}[Other Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
+						<input type='hidden' name='attr_rollmUnskilled' value='/em @{character_name} attempts to not suck and rolls: [[1d@{Unskilled}![Unskilled] -2[Unskilled Penalty] + @{UnskilledMod}[Other Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
 					</div>
 				</div>
 				<!-- Break -->
@@ -1173,8 +1183,8 @@
 					</div>		
 					<div class='sheet-col' style='width:100px;'>
 						<input type="number" name="attr_FightingMod" class="sheet-short" value="0" />
-						<button type='roll' name='roll_Fighting' value='/em @{character_name} attempts to hit something and rolls [[{1d@{fighting}![Fighting], 1d@{wilddie}![Wild Die]}kh1 + @{FightingMod}[Fighting Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
-						<input type='hidden' name='attr_rollFighting' value='/em @{character_name} attempts to hit something and rolls [[{1d@{fighting}![Fighting], 1d@{wilddie}![Wild Die]}kh1 + @{FightingMod}[Fighting Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
+						<button type='roll' name='roll_mFighting' value='/em @{character_name} attempts to hit something and rolls [[1d@{fighting}![Fighting] + @{FightingMod}[Fighting Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
+						<input type='hidden' name='attr_rollmFighting' value='/em @{character_name} attempts to hit something and rolls [[1d@{fighting}![Fighting] + @{FightingMod}[Fighting Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
 					</div>
 					<fieldset class="repeating_skills">
 						<div class='sheet-row'>
@@ -1194,8 +1204,8 @@
 	 						</div>
     						<div class='sheet-col' style='width:100px;'>
     							<input type="number" name="attr_SkillNameMod" class="sheet-short" value="0" />
-								<button type='roll' name='roll_SkillName' value='/em @{character_name} attempts to do something with @{SkillName} and rolls: [[{1d@{SkillNameRank}![@{SkillName}], 1d@{wilddie}![Wild Die]}kh1 + @{SkillNameMod}[Skill Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
-    							<input type='hidden' name='attr_rollSkill' value='/em @{character_name} attempts to do something with @{SkillName} and rolls: [[{1d@{SkillNameRank}![@{SkillName}], 1d@{wilddie}![Wild Die]}kh1 + @{SkillNameMod}[Skill Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
+								<button type='roll' name='roll_mSkillName' value='/em @{character_name} attempts to do something with @{SkillName} and rolls: [[1d@{SkillNameRank}![@{SkillName}] + @{SkillNameMod}[Skill Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!'></button>
+    							<input type='hidden' name='attr_rollmSkill' value='/em @{character_name} attempts to do something with @{SkillName} and rolls: [[1d@{SkillNameRank}![@{SkillName}] + @{SkillNameMod}[Skill Modifiers] + @{ttmod}[Situational Modifiers] - @{wounds}[Wounds] - @{fatigue}[Fatigue]]]!' />
     						</div>
     					</div>
     				</fieldset>
